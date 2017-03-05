@@ -100,10 +100,12 @@ def _process_text():
         seq_in_serial = [characters_to_int[c] for c in seq_in]
         seq_out_serial = characters_to_int[seq_out]
 
-        example = _convert_to_example(''.join(seq_in), ''.join(seq_out), seq_in_serial, seq_out_serial)
+        example = _convert_to_example(''.join(seq_in), ''.join(seq_out), seq_in_serial,
+                                      seq_out_serial)
         writer.write(example.SerializeToString())
-        print('[INFO] Finish write %d sequence.' % i)
-        j = (j+1)
+        if i % 500 == 0:
+            print('[INFO] Finish write %d sequence.' % i)
+        j = (j + 1)
     print('[INFO] Finished. tf record file contains %d sequences.' % j)
 
 
